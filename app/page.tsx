@@ -63,10 +63,10 @@ type LeafletMap = {
   fitBounds: (bounds: unknown, options?: Record<string, unknown>) => void;
 };
 
-type LeafletLayer = {
+interface LeafletLayer {
   addTo(map: LeafletMap): this;
   remove: () => void;
-};
+}
 
 type LeafletCircle = LeafletLayer & {
   getBounds: () => unknown;
