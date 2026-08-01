@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
 
 type Point = { lat: number; lng: number };
 type OSMTags = Record<string, string>;
@@ -673,10 +674,10 @@ export default function Home() {
             <span>Business location intelligence</span>
           </div>
         </div>
-        <div className="header-location">
-          <span className="live-dot" aria-hidden="true" />
-          Settat OpenStreetMap data
-        </div>
+        <nav className="app-nav" aria-label="Primary navigation">
+          <Link className="active" href="/">Location fit</Link>
+          <Link href="/evolution">Business evolution</Link>
+        </nav>
         <div className="city-lock">
           <span>City</span>
           <strong>Settat, Morocco</strong>

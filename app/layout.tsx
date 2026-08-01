@@ -3,9 +3,23 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://eafinder.vercel.app",
+  ),
   title: "SettatScope | Business Location Intelligence",
   description:
-    "Analyze small-area business fit anywhere in Settat using live OpenStreetMap businesses, services, buildings, streets and transit data.",
+    "Analyze small-area business fit and follow official company activity over time in Settat, Morocco.",
+  openGraph: {
+    title: "SettatScope",
+    description: "Business evolution and location intelligence for Settat.",
+    images: [{ url: "/og.png", width: 1732, height: 910, alt: "SettatScope business evolution timeline" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "SettatScope",
+    description: "Business evolution and location intelligence for Settat.",
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({

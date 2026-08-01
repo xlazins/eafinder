@@ -7,6 +7,8 @@
   },
   "scripts": {
     "dev": "next dev",
+    "build:data": "node tools/build-gazette-history.mjs",
+    "prebuild": "npm run build:data",
     "build": "next build",
     "start": "next start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",

@@ -1,0 +1,1132 @@
+{
+  "schema_version": "1.0.0",
+  "coverage": {
+    "issue_count": 1,
+    "issues": [
+      {
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "source_records": 1618,
+        "settat_candidates": 25,
+        "filename": "BOAL_5922_all-cities.json"
+      }
+    ],
+    "source_record_count": 1618,
+    "settat_candidate_count": 25,
+    "event_count": 24,
+    "address_supported_count": 9,
+    "registry_supported_count": 3,
+    "mention_only_count": 12,
+    "needs_review_count": 9,
+    "first_event_date": "2026-02-17",
+    "last_event_date": "2026-04-17"
+  },
+  "events": [
+    {
+      "id": "boal-5922-qqyi9s",
+      "company_id": "rc-61003",
+      "company_name": "STE SIFRALE L'ISAKANE",
+      "legal_form": "SARL",
+      "commercial_register_number": "61003",
+      "event_type": "REGISTERED_OFFICE_CHANGE",
+      "event_date": "2026-02-17",
+      "event_date_source": "decision_date",
+      "effective_date": null,
+      "status_effect": "changed",
+      "business_purpose": null,
+      "capital_mad": null,
+      "manager_or_liquidator": null,
+      "registered_address": "289 تجزئة هبة، متجر رقم 1 ان فاس - 30000 فاس الملكة المغربية. تحويل المقر الاجتماعي للشركة",
+      "branch_address": null,
+      "display_address": "289 تجزئة هبة، متجر رقم 1 ان فاس - 30000 فاس الملكة المغربية. تحويل المقر الاجتماعي للشركة",
+      "location_basis": "city_mention",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat",
+        "Fes"
+      ],
+      "filing": {
+        "court": "بالمجمكة التجارية بفاس",
+        "date": null,
+        "number": "2026"
+      },
+      "confidence": 0.95,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          158
+        ],
+        "printed_pages": [
+          "10198"
+        ],
+        "notice_reference": "107I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-147rtae",
+      "company_id": "rc-8523",
+      "company_name": "KLEAT",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "8523",
+      "event_type": "BRANCH_OPENING",
+      "event_date": "2026-02-26",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-04-08",
+      "status_effect": "added",
+      "business_purpose": null,
+      "capital_mad": null,
+      "manager_or_liquidator": "قنوس يونس.",
+      "registered_address": "مجمع الخير رقم 226",
+      "branch_address": "بن قاصم ر1 و ر2 شارع بير انزاران رقم 48",
+      "display_address": "بن قاصم ر1 و ر2 شارع بير انزاران رقم 48",
+      "location_basis": "registry_context",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat"
+      ],
+      "filing": {
+        "court": "تم الإيداع القانوني بالمحكمة الابتدائية بسطات",
+        "date": "2026-04-08",
+        "number": "122"
+      },
+      "confidence": 1,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          332
+        ],
+        "printed_pages": [
+          "10372"
+        ],
+        "notice_reference": "677I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-x1jfrc",
+      "company_id": "rc-7503",
+      "company_name": "EIM TRANS",
+      "legal_form": "SARL",
+      "commercial_register_number": "7503",
+      "event_type": "SHARE_TRANSFER",
+      "event_date": "2026-03-02",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-03-10",
+      "status_effect": "changed",
+      "business_purpose": null,
+      "capital_mad": null,
+      "manager_or_liquidator": null,
+      "registered_address": "مجمع الخير الرقم 405 الطابق الرابع سطات المغرب. تفويت حصص",
+      "branch_address": null,
+      "display_address": "مجمع الخير الرقم 405 الطابق الرابع سطات المغرب. تفويت حصص",
+      "location_basis": "address_match",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat"
+      ],
+      "filing": {
+        "court": "تم الإيداع القانوني بالمحكمة الابتدائية بسطات",
+        "date": "2026-03-10",
+        "number": "26/85/2026"
+      },
+      "confidence": 0.95,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          212
+        ],
+        "printed_pages": [
+          "10252"
+        ],
+        "notice_reference": "287I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-1inbljp",
+      "company_id": "rc-2515",
+      "company_name": "BEDACOM",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "2515",
+      "event_type": "INCORPORATION",
+      "event_date": "2026-03-04",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-02-13",
+      "status_effect": "added",
+      "business_purpose": "استيراد وتصدير وتسويق وتوزيع وترويج جميع المنتجات أو المعدات أو الأدوات أو الملحقات. → التجارة الوطنية والدولية. أعمال متنوعة أو أعمال بناء. → المشاركة أو المصالح بجميع أشكالها، في جميع الشركات أو",
+      "capital_mad": null,
+      "manager_or_liquidator": null,
+      "registered_address": "يعيش الطريق الوطنية لفاس رقم 8 كلم 4.50 ملال المغرب",
+      "branch_address": null,
+      "display_address": "يعيش الطريق الوطنية لفاس رقم 8 كلم 4.50 ملال المغرب",
+      "location_basis": "city_mention",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat",
+        "Casablanca",
+        "Fes",
+        "Beni Mellal",
+        "Essaouira"
+      ],
+      "filing": {
+        "court": "تم الإيداع القانوني بالمحكمة الابتدائية ببني ملال",
+        "date": "2026-04-14",
+        "number": "2026"
+      },
+      "confidence": 1,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          602
+        ],
+        "printed_pages": [
+          "10642"
+        ],
+        "notice_reference": "1557I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-ozawsf",
+      "company_id": "rc-4107",
+      "company_name": "MODI FROID CLIM",
+      "legal_form": "SARL",
+      "commercial_register_number": "4107",
+      "event_type": "SHARE_TRANSFER",
+      "event_date": "2026-03-09",
+      "event_date_source": "decision_date",
+      "effective_date": null,
+      "status_effect": "changed",
+      "business_purpose": null,
+      "capital_mad": null,
+      "manager_or_liquidator": null,
+      "registered_address": "مركز سطات للتسوق رقم 20، تجزئة الخير -- سطحات المغرب. تفويت حصص",
+      "branch_address": null,
+      "display_address": "مركز سطات للتسوق رقم 20، تجزئة الخير -- سطحات المغرب. تفويت حصص",
+      "location_basis": "address_match",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat"
+      ],
+      "filing": {
+        "court": "تم الإيداع القانوني بالمحكمة الابتدائية بسطات",
+        "date": null,
+        "number": null
+      },
+      "confidence": 0.95,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          513
+        ],
+        "printed_pages": [
+          "10553"
+        ],
+        "notice_reference": "1272I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-1upm70f",
+      "company_id": "rc-21147",
+      "company_name": "LAY MONEY",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "21147",
+      "event_type": "REGISTERED_OFFICE_CHANGE",
+      "event_date": "2026-03-16",
+      "event_date_source": "decision_date",
+      "effective_date": null,
+      "status_effect": "changed",
+      "business_purpose": null,
+      "capital_mad": null,
+      "manager_or_liquidator": null,
+      "registered_address": "GHIZLANE DOUBLANE",
+      "branch_address": null,
+      "display_address": "GHIZLANE DOUBLANE",
+      "location_basis": "city_mention",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat",
+        "El Jadida"
+      ],
+      "filing": {
+        "court": null,
+        "date": null,
+        "number": null
+      },
+      "confidence": 0.95,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          174
+        ],
+        "printed_pages": [
+          "10214"
+        ],
+        "notice_reference": null,
+        "notice_reference_inferred": false
+      }
+    },
+    {
+      "id": "boal-5922-wmcw8x",
+      "company_id": "name-3ck-cafe-fakkar-xc63un",
+      "company_name": "3CK CAFE FAKKAR",
+      "legal_form": "SARL",
+      "commercial_register_number": null,
+      "event_type": "SHARE_TRANSFER",
+      "event_date": "2026-03-24",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-04-10",
+      "status_effect": "changed",
+      "business_purpose": null,
+      "capital_mad": null,
+      "manager_or_liquidator": null,
+      "registered_address": "12 تجزئة حاتي شارع محمد الخامس سطات - 26000 سطات المغرب. تفويت حصص",
+      "branch_address": null,
+      "display_address": "12 تجزئة حاتي شارع محمد الخامس سطات - 26000 سطات المغرب. تفويت حصص",
+      "location_basis": "address_match",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat",
+        "Tangier"
+      ],
+      "filing": {
+        "court": "تم الإيداع القانوني بالمحكمة الابتداية بسطات",
+        "date": "2026-04-10",
+        "number": "126"
+      },
+      "confidence": 0.8,
+      "needs_review": true,
+      "review_reasons": [
+        "commercial_register_number_missing"
+      ],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          277
+        ],
+        "printed_pages": [
+          "10317"
+        ],
+        "notice_reference": "498I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-1fnt83o",
+      "company_id": "rc-725441",
+      "company_name": "AWLAD BOSARHAN SARLAU",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "725441",
+      "event_type": "INCORPORATION",
+      "event_date": "2026-03-26",
+      "event_date_source": "decision_date",
+      "effective_date": null,
+      "status_effect": "added",
+      "business_purpose": "بيع وشراء مواد البناء - عنوان المقر الاجتماعي: رقم 85 زنقة نخلة زاوية زنقة الامير مولاي عبد الله الطابق 1 شقة 1 حي الحرية الدارالبيضاء 2000 سيدي بليوط المغرب",
+      "capital_mad": 100000,
+      "manager_or_liquidator": null,
+      "registered_address": "زنقة نخلة زاوية زنقة الامير مولاي عبد الله الطابق 1 شقة 1 حي الحرية الدارالبيضاء 2000 سيدي بليوط",
+      "branch_address": null,
+      "display_address": "زنقة نخلة زاوية زنقة الامير مولاي عبد الله الطابق 1 شقة 1 حي الحرية الدارالبيضاء 2000 سيدي بليوط",
+      "location_basis": "city_mention",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat",
+        "Casablanca"
+      ],
+      "filing": {
+        "court": null,
+        "date": null,
+        "number": null
+      },
+      "confidence": 1,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          460
+        ],
+        "printed_pages": [
+          "10500"
+        ],
+        "notice_reference": null,
+        "notice_reference_inferred": false
+      }
+    },
+    {
+      "id": "boal-5922-kctfro",
+      "company_id": "rc-5059",
+      "company_name": "SAFRES",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "5059",
+      "event_type": "DISSOLUTION",
+      "event_date": "2026-03-27",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-04-06",
+      "status_effect": "ceased",
+      "business_purpose": null,
+      "capital_mad": 100000,
+      "manager_or_liquidator": "صفاء بكوري",
+      "registered_address": "رقم 633 الطابق الأرضي بلوك أكمال 2 - 26000 سطات المغرب.",
+      "branch_address": null,
+      "display_address": "رقم 633 الطابق الأرضي بلوك أكمال 2 - 26000 سطات المغرب.",
+      "location_basis": "address_match",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat"
+      ],
+      "filing": {
+        "court": "تم الإيداع القانوني بالمحكمة الابتداية بسطات",
+        "date": "2026-04-06",
+        "number": "2026/118/2026"
+      },
+      "confidence": 1,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          375
+        ],
+        "printed_pages": [
+          "10415"
+        ],
+        "notice_reference": "810I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-39y3rv",
+      "company_id": "rc-5723",
+      "company_name": "iduciaire la grande class افراح مبروكة شركة التضامن حل شركة",
+      "legal_form": null,
+      "commercial_register_number": "5723",
+      "event_type": "DISSOLUTION",
+      "event_date": "2026-04-01",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-04-09",
+      "status_effect": "ceased",
+      "business_purpose": null,
+      "capital_mad": 10000,
+      "manager_or_liquidator": "محسن مقبول",
+      "registered_address": "اللوح هي مبروكة الرقم 45-26000 سلطات المغرب",
+      "branch_address": null,
+      "display_address": "اللوح هي مبروكة الرقم 45-26000 سلطات المغرب",
+      "location_basis": "address_match",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat",
+        "Ouezzane"
+      ],
+      "filing": {
+        "court": "تم الإيداع القانوني بالمحكمة الابتداية بسطات",
+        "date": "2026-04-09",
+        "number": "2026/123/2026"
+      },
+      "confidence": 0.9,
+      "needs_review": true,
+      "review_reasons": [
+        "legal_form_missing"
+      ],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          319
+        ],
+        "printed_pages": [
+          "10359"
+        ],
+        "notice_reference": "630I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-1ghmph4",
+      "company_id": "rc-8527",
+      "company_name": "GOLDEN HOUSE DAHBI SARL",
+      "legal_form": "SARL",
+      "commercial_register_number": "8527",
+      "event_type": "INCORPORATION",
+      "event_date": "2026-04-13",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-04-01",
+      "status_effect": "added",
+      "business_purpose": "GOLDEN HOUSE DAHBI SARL - غرض الشركة بياجاز: منعش عقاري - عنوان المقر الاجتماعي: شارع حمان الفطواكي عمارة 26 الطابق 2 الرقم 5 سطات 26000 سطات المغرب",
+      "capital_mad": 900000,
+      "manager_or_liquidator": null,
+      "registered_address": "وصف موجز لها وتقييم لها: - درهم، - بيانات حول الشرعاء الأشخاص الطبيعيون",
+      "branch_address": null,
+      "display_address": "وصف موجز لها وتقييم لها: - درهم، - بيانات حول الشرعاء الأشخاص الطبيعيون",
+      "location_basis": "registry_context",
+      "address_quality": "suspicious",
+      "cities_mentioned": [
+        "Settat"
+      ],
+      "filing": {
+        "court": null,
+        "date": "2026-04-01",
+        "number": null
+      },
+      "confidence": 1,
+      "needs_review": true,
+      "review_reasons": [
+        "address_text_suspicious"
+      ],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          139
+        ],
+        "printed_pages": [
+          "10179"
+        ],
+        "notice_reference": "51I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-x36edb",
+      "company_id": "rc-197775",
+      "company_name": "PROLUX NET SARLAU",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "197775",
+      "event_type": "INCORPORATION",
+      "event_date": "2026-04-13",
+      "event_date_source": "decision_date",
+      "effective_date": null,
+      "status_effect": "added",
+      "business_purpose": "خدمات متنوعة بيع وشراء منتجات التنظيف تجارة عامة توزيع استيراد وتصدير استشارات إدارة الأرشيف - عنوان المقر الاجتماعي: شارع الثالت حي يعقوب المنصور الرباط - يعقوب المنصور المغرب",
+      "capital_mad": 100000,
+      "manager_or_liquidator": null,
+      "registered_address": "الكفاح بلوك ج رقم 52 الطابق الثالث حي يعقوب المنصور الرباط - يعقوب المنصور المغرب",
+      "branch_address": null,
+      "display_address": "الكفاح بلوك ج رقم 52 الطابق الثالث حي يعقوب المنصور الرباط - يعقوب المنصور المغرب",
+      "location_basis": "city_mention",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat",
+        "Rabat"
+      ],
+      "filing": {
+        "court": null,
+        "date": null,
+        "number": null
+      },
+      "confidence": 1,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          140
+        ],
+        "printed_pages": [
+          "10180"
+        ],
+        "notice_reference": "54I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-fau2ow",
+      "company_id": "rc-15797",
+      "company_name": "ATLAS AIRDESK CABIN",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "15797",
+      "event_type": "BRANCH_OPENING",
+      "event_date": "2026-04-14",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-04-06",
+      "status_effect": "added",
+      "business_purpose": "الاستشارة والمواكبة في التحول الرقمي/اتطوير ودمج الحلول التكنولوجية لقطاع الفنادق والفعاليات - عنوان المقر الاجتماعي: عمارة",
+      "capital_mad": 100000,
+      "manager_or_liquidator": null,
+      "registered_address": "وعنوان مقرها الإجتماعي عمارة رقم 30، شقة رقم 08، شارع مولاي أحمد لوكيلي، حسان، الرباط العيون - العيون المغرب. إنشاء فرع تابع للشركة",
+      "branch_address": null,
+      "display_address": "وعنوان مقرها الإجتماعي عمارة رقم 30، شقة رقم 08، شارع مولاي أحمد لوكيلي، حسان، الرباط العيون - العيون المغرب. إنشاء فرع تابع للشركة",
+      "location_basis": "city_mention",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat",
+        "Rabat",
+        "Laayoune"
+      ],
+      "filing": {
+        "court": null,
+        "date": "2026-04-06",
+        "number": null
+      },
+      "confidence": 1,
+      "needs_review": true,
+      "review_reasons": [
+        "branch_address_missing"
+      ],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          283,
+          284
+        ],
+        "printed_pages": [
+          "10323",
+          "10324"
+        ],
+        "notice_reference": "517I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-liphsg",
+      "company_id": "rc-8531",
+      "company_name": "Cap jalil SARLAU",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "8531",
+      "event_type": "INCORPORATION",
+      "event_date": "2026-04-14",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-04-07",
+      "status_effect": "added",
+      "business_purpose": null,
+      "capital_mad": 100000,
+      "manager_or_liquidator": null,
+      "registered_address": "حمان الفطواكي عمارة 26 الطابق 02 رقم 5 سطات - سطات المغرب",
+      "branch_address": null,
+      "display_address": "حمان الفطواكي عمارة 26 الطابق 02 رقم 5 سطات - سطات المغرب",
+      "location_basis": "address_match",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat"
+      ],
+      "filing": {
+        "court": null,
+        "date": "2026-04-07",
+        "number": null
+      },
+      "confidence": 0.95,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          239
+        ],
+        "printed_pages": [
+          "10279"
+        ],
+        "notice_reference": "376I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-jh9bi2",
+      "company_id": "rc-725043",
+      "company_name": "Carrières & Sables Atlas SARLAU",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "725043",
+      "event_type": "INCORPORATION",
+      "event_date": "2026-04-14",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-04-07",
+      "status_effect": "added",
+      "business_purpose": "استغلال المقالع؛ أعمال البناء الخامس، الشقة 21، إقامة ريحان، حي المعاريف - المعاريف المغرب",
+      "capital_mad": 100000,
+      "manager_or_liquidator": null,
+      "registered_address": "رحال المسكيني الطابق 02 الشقة 05 البيضاء - سيدي بليوط المغرب",
+      "branch_address": null,
+      "display_address": "رحال المسكيني الطابق 02 الشقة 05 البيضاء - سيدي بليوط المغرب",
+      "location_basis": "registry_context",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat"
+      ],
+      "filing": {
+        "court": null,
+        "date": "2026-04-07",
+        "number": null
+      },
+      "confidence": 1,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          254,
+          255
+        ],
+        "printed_pages": [
+          "10294",
+          "10295"
+        ],
+        "notice_reference": null,
+        "notice_reference_inferred": false
+      }
+    },
+    {
+      "id": "boal-5922-16cqfh6",
+      "company_id": "rc-725199",
+      "company_name": "GetFarm SARLAU",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "725199",
+      "event_type": "INCORPORATION",
+      "event_date": "2026-04-14",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-04-05",
+      "status_effect": "added",
+      "business_purpose": "مبرمج، محلل و مصمم معلوميات - عنوان المقر الاجتماعي: 276 شارع ابن تاشفين الطابق الثالث الدار البيضاء- الحي المحمدي المغرب",
+      "capital_mad": 10000,
+      "manager_or_liquidator": null,
+      "registered_address": "ابن تاشفين الطابق الثالث الدار البيضاء - الحي المحمدي المغرب",
+      "branch_address": null,
+      "display_address": "ابن تاشفين الطابق الثالث الدار البيضاء - الحي المحمدي المغرب",
+      "location_basis": "city_mention",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat",
+        "Casablanca"
+      ],
+      "filing": {
+        "court": null,
+        "date": "2026-04-05",
+        "number": null
+      },
+      "confidence": 1,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          308
+        ],
+        "printed_pages": [
+          "10348"
+        ],
+        "notice_reference": "592I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-1nf3bco",
+      "company_id": "rc-8529",
+      "company_name": "GROUPE SCOLAIRE LES 7",
+      "legal_form": "SARL",
+      "commercial_register_number": "8529",
+      "event_type": "INCORPORATION",
+      "event_date": "2026-04-14",
+      "event_date_source": "decision_date",
+      "effective_date": null,
+      "status_effect": "added",
+      "business_purpose": null,
+      "capital_mad": null,
+      "manager_or_liquidator": null,
+      "registered_address": null,
+      "branch_address": null,
+      "display_address": null,
+      "location_basis": "city_mention",
+      "address_quality": "missing",
+      "cities_mentioned": [
+        "Settat",
+        "Casablanca",
+        "Sale"
+      ],
+      "filing": {
+        "court": null,
+        "date": null,
+        "number": null
+      },
+      "confidence": 0.8,
+      "needs_review": true,
+      "review_reasons": [
+        "paddle_table_layout_reconstructed",
+        "usable_address_missing"
+      ],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          238,
+          239
+        ],
+        "printed_pages": [
+          "10278",
+          "10279"
+        ],
+        "notice_reference": null,
+        "notice_reference_inferred": false
+      }
+    },
+    {
+      "id": "boal-5922-19hsk10",
+      "company_id": "rc-724933",
+      "company_name": "IRYS FILMS SARLAU",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "724933",
+      "event_type": "INCORPORATION",
+      "event_date": "2026-04-14",
+      "event_date_source": "decision_date",
+      "effective_date": null,
+      "status_effect": "added",
+      "business_purpose": "وتوزيع الشرطة سينائية - انتاج عمل موسيقي «وكالة استشارات الانصالات والعلانات - الاتحاة التنفدي لحساب داخل الوطن وخارجها - عنوان المقر الاجتماعي القائات المذلاء التي تأسست من أجلها الشركة: 99 سسة",
+      "capital_mad": 100000,
+      "manager_or_liquidator": null,
+      "registered_address": "القائات المذلاء التي تأسست من أجلها الشركة: 99 سسة",
+      "branch_address": null,
+      "display_address": "القائات المذلاء التي تأسست من أجلها الشركة: 99 سسة",
+      "location_basis": "city_mention",
+      "address_quality": "suspicious",
+      "cities_mentioned": [
+        "Settat",
+        "Casablanca",
+        "Sale"
+      ],
+      "filing": {
+        "court": null,
+        "date": null,
+        "number": null
+      },
+      "confidence": 1,
+      "needs_review": true,
+      "review_reasons": [
+        "paddle_table_layout_reconstructed",
+        "address_text_suspicious"
+      ],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          238
+        ],
+        "printed_pages": [
+          "10278"
+        ],
+        "notice_reference": "374I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-82ge9t",
+      "company_id": "name-rhazi-global-group-sarlau-1vnb4cr",
+      "company_name": "Rhazi Global Group SARLAU",
+      "legal_form": "SARL AU",
+      "commercial_register_number": null,
+      "event_type": "INCORPORATION",
+      "event_date": "2026-04-14",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-04-06",
+      "status_effect": "added",
+      "business_purpose": "الخدمات الرقمية وتطوير تكنولوجيا المعلومات - تصميم وتطوير وإدارة مواقع الوبو والمنصات الرقمية وتطبيقات الهاتف المحمول، وتطوير أنظمة الإحالة الطبيعية وحلول العلان عبر الإنترنت وأدوات إدارة الشبكات الاجتماعية الإليه- تقدم خدمات البرمجة والاستشارات",
+      "capital_mad": 100000,
+      "manager_or_liquidator": null,
+      "registered_address": "بصفته (1) والكاثن عنوانه ب: حي مبروكة زنقة الزويرات الرقم 23 سطات - سطات المغرب",
+      "branch_address": null,
+      "display_address": "بصفته (1) والكاثن عنوانه ب: حي مبروكة زنقة الزويرات الرقم 23 سطات - سطات المغرب",
+      "location_basis": "address_match",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat",
+        "Casablanca"
+      ],
+      "filing": {
+        "court": null,
+        "date": "2026-04-06",
+        "number": null
+      },
+      "confidence": 0.85,
+      "needs_review": true,
+      "review_reasons": [
+        "commercial_register_number_missing"
+      ],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          239
+        ],
+        "printed_pages": [
+          "10279"
+        ],
+        "notice_reference": "377I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-16p3e5l",
+      "company_id": "rc-8533",
+      "company_name": "ELITE MIND SARLAU",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "8533",
+      "event_type": "INCORPORATION",
+      "event_date": "2026-04-15",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-03-05",
+      "status_effect": "added",
+      "business_purpose": "الاستشارات الإدارية خدمات معلومات أخرى غير مصنفة في مكان آخر تاجر - عنوان المقر الاجتماعي: تجزئة مجمع الخير رقم 500 الطابق 4 - مبلغ الحصص العينية مع - وصف موجز لها وتقييم لها: - درهم،",
+      "capital_mad": null,
+      "manager_or_liquidator": null,
+      "registered_address": "مجمع الخير رقم 500 الطابق 4 سطات 26000 سطات المغرب",
+      "branch_address": null,
+      "display_address": "مجمع الخير رقم 500 الطابق 4 سطات 26000 سطات المغرب",
+      "location_basis": "address_match",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat"
+      ],
+      "filing": {
+        "court": null,
+        "date": "2026-03-05",
+        "number": null
+      },
+      "confidence": 1,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          338
+        ],
+        "printed_pages": [
+          "10378"
+        ],
+        "notice_reference": null,
+        "notice_reference_inferred": false
+      }
+    },
+    {
+      "id": "boal-5922-1ah6ea2",
+      "company_id": "rc-174751",
+      "company_name": "VABENE POOL SARLAU",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "174751",
+      "event_type": "INCORPORATION",
+      "event_date": "2026-04-15",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-02-18",
+      "status_effect": "added",
+      "business_purpose": "«الإعلان. تصميم وتنفيذ الحملات الإعلانية. • تصميم الجرافيك وإنشاء المواد التسويقية. • الإعلان والتواصل عبر الوسائط الرقمية والتقليدية. التواصل إدارة حسابات الاجتماعي والتفاعل معها. • إنتاج المحتوي المرني والمسموع. • طباعة وانتاج المواد الإعلاني - عنوان المقر الاجتماعي: المكتب سي، رقم 06 ب، طنجة 90000 طنجة المدينة المغرب",
+      "capital_mad": 100000,
+      "manager_or_liquidator": null,
+      "registered_address": "المركز التجاري لا كولين، الحي الإداري، الطابق الأرضي 26000 سطات إعلان عن تأسيس شركة ذات مسؤولية محدودة ذات الشريك الوحيد",
+      "branch_address": null,
+      "display_address": "المركز التجاري لا كولين، الحي الإداري، الطابق الأرضي 26000 سطات إعلان عن تأسيس شركة ذات مسؤولية محدودة ذات الشريك الوحيد",
+      "location_basis": "address_match",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat",
+        "Tangier"
+      ],
+      "filing": {
+        "court": null,
+        "date": "2026-02-18",
+        "number": null
+      },
+      "confidence": 1,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          390,
+          391
+        ],
+        "printed_pages": [
+          "10430",
+          "10431"
+        ],
+        "notice_reference": "868I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-z298f4",
+      "company_id": "rc-441",
+      "company_name": "HJR SUPPLY SARLAU",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "441",
+      "event_type": "INCORPORATION",
+      "event_date": "2026-04-16",
+      "event_date_source": "decision_date",
+      "effective_date": null,
+      "status_effect": "added",
+      "business_purpose": null,
+      "capital_mad": null,
+      "manager_or_liquidator": null,
+      "registered_address": "الحربة الطابق 3 الشقة 5 الدار البيضاء 20000 سيدي بليوط المغرب",
+      "branch_address": null,
+      "display_address": "الحربة الطابق 3 الشقة 5 الدار البيضاء 20000 سيدي بليوط المغرب",
+      "location_basis": "city_mention",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat",
+        "Casablanca"
+      ],
+      "filing": {
+        "court": null,
+        "date": null,
+        "number": null
+      },
+      "confidence": 0.8,
+      "needs_review": true,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          461
+        ],
+        "printed_pages": [
+          "10501"
+        ],
+        "notice_reference": "1109I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-1k3kp0n",
+      "company_id": "rc-27403",
+      "company_name": "HERBES OULED SAID SARL",
+      "legal_form": "SARL",
+      "commercial_register_number": "27403",
+      "event_type": "INCORPORATION",
+      "event_date": "2026-04-17",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-04-09",
+      "status_effect": "added",
+      "business_purpose": "تصدير النباتات الطلزة أو المحففة للاستخدام البشري، بما في ذلك النباتات وأكياس الشاي (النعناء البابونج، بلسم اليمون، الزرزون، المريمية، زهر الرتقال، إلخ والأعشاب المستخدمة في الطهي (الطرخون، البقدونس، الكرفس، الثوم المعمر، الثوم، بالإضافة إلى أعشاب المشروبات (الشمر، اليانسون الأخضر، اليانسون النجي، الجنطيانا الصفاء، الشيخ الجني، التوث البري، نبتة سانت جون، البابونج، ونباتات العطور (وردة مايو، البنفسح، الخزامي، الماسمين، الخزامي الهندي، المربية المتصلية، الميموزا، الريحان، الزوقا) - عنوان المقر الاجتماعي: شارع محمد 5 دیور اسفی رقم 47 طابق 3 برشید - برشید المغرب",
+      "capital_mad": 100000,
+      "manager_or_liquidator": null,
+      "registered_address": "شارع محمد 5 دیور اسفی رقم 47 طابق 3 برشید - برشید المغرب - المدة التي تأسست من أجلها الشركة: 99 سنه",
+      "branch_address": null,
+      "display_address": "شارع محمد 5 دیور اسفی رقم 47 طابق 3 برشید - برشید المغرب - المدة التي تأسست من أجلها الشركة: 99 سنه",
+      "location_basis": "city_mention",
+      "address_quality": "suspicious",
+      "cities_mentioned": [
+        "Settat",
+        "Berrechid"
+      ],
+      "filing": {
+        "court": null,
+        "date": "2026-04-09",
+        "number": null
+      },
+      "confidence": 1,
+      "needs_review": true,
+      "review_reasons": [
+        "address_text_suspicious"
+      ],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          595,
+          596
+        ],
+        "printed_pages": [
+          "10635",
+          "10636"
+        ],
+        "notice_reference": "1534I",
+        "notice_reference_inferred": true
+      }
+    },
+    {
+      "id": "boal-5922-1odpdkc",
+      "company_id": "rc-27409",
+      "company_name": "KASSER AL KHAYL",
+      "legal_form": "SARL AU",
+      "commercial_register_number": "27409",
+      "event_type": "INCORPORATION",
+      "event_date": "2026-04-17",
+      "event_date_source": "decision_date",
+      "effective_date": "2026-03-11",
+      "status_effect": "added",
+      "business_purpose": "تربية الخيول والخيول الأخرى. - نشاط ركوب الخيل ونحوها. - تقديم الطعام بعد نشاط ركوب - عنوان المقر الاجتماعي: دوار",
+      "capital_mad": 100000,
+      "manager_or_liquidator": null,
+      "registered_address": "لاغفيرات جماعة جقما برشيد 26202 جاقمة المغرب",
+      "branch_address": null,
+      "display_address": "لاغفيرات جماعة جقما برشيد 26202 جاقمة المغرب",
+      "location_basis": "city_mention",
+      "address_quality": "usable",
+      "cities_mentioned": [
+        "Settat",
+        "Berrechid"
+      ],
+      "filing": {
+        "court": null,
+        "date": "2026-03-11",
+        "number": null
+      },
+      "confidence": 1,
+      "needs_review": false,
+      "review_reasons": [],
+      "source": {
+        "series": "BOAL",
+        "issue_number": "5922",
+        "publication_date": "2026-04-29",
+        "pdf_pages": [
+          595
+        ],
+        "printed_pages": [
+          "10635"
+        ],
+        "notice_reference": null,
+        "notice_reference_inferred": false
+      }
+    }
+  ]
+}
