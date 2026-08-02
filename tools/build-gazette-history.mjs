@@ -14,6 +14,12 @@ const DEFAULT_OUTPUT_FILE = path.join(
   "data",
   "settat-business-history.json",
 );
+const DEFAULT_GEOCODE_FILE = path.join(
+  process.cwd(),
+  "data",
+  "gazette",
+  "geocodes.json",
+);
 
 const SETTAT_PATTERN = /(?:\bsettat\b|سطات|سلطات|سطحات)/iu;
 const SUSPICIOUS_ADDRESS_PATTERN =
@@ -29,7 +35,9 @@ const CEASED_EVENTS = new Set([
 export async function buildHistoryDataset({
   sourceDirectory = DEFAULT_SOURCE_DIRECTORY,
   outputFile = DEFAULT_OUTPUT_FILE,
+  geocodeFile = DEFAULT_GEOCODE_FILE,
 } = {}) {
+  const geocodes = await readGeocodes(geocodeFile);
   const filenames = (await readdir(sourceDirectory))
     .filter((filename) => filename.toLowerCase().endsWith(".json"))
     .sort((left, right) => left.localeCompare(right, "en"));
@@ -68,6 +76,7 @@ export async function buildHistoryDataset({
   }
 
   const events = deduplicateEvents(candidates)
+    .map((event) => attachMapLocation(event, geocodes.events))
     .sort((left, right) => (
       left.event_date.localeCompare(right.event_date) ||
       left.company_name.localeCompare(right.company_name, "en")
@@ -95,11 +104,17 @@ export async function buildHistoryDataset({
       (event) => event.location_basis === "city_mention",
     ).length,
     needs_review_count: events.filter((event) => event.needs_review).length,
+    mapped_event_count: events.filter((event) => event.map_eligible).length,
+    unmapped_event_count: events.filter((event) => !event.map_eligible).length,
+    mapped_anchor_count: new Set(
+      events.filter((event) => event.map_eligible).map((event) => event.map_location.anchor_id),
+    ).size,
     first_event_date: dates[0] || null,
     last_event_date: dates.at(-1) || null,
   };
   const output = {
-    schema_version: "1.0.0",
+    schema_version: "1.1.0",
+    map_attribution: geocodes.attribution || null,
     coverage,
     events,
   };
@@ -107,6 +122,40 @@ export async function buildHistoryDataset({
   await mkdir(path.dirname(outputFile), { recursive: true });
   await writeFile(outputFile, `${JSON.stringify(output, null, 2)}\n`, "utf8");
   return output;
+}
+
+async function readGeocodes(geocodeFile) {
+  try {
+    const payload = JSON.parse(await readFile(geocodeFile, "utf8"));
+    return {
+      attribution: cleanString(payload.attribution),
+      events: payload.events && typeof payload.events === "object" ? payload.events : {},
+    };
+  } catch (error) {
+    if (error?.code === "ENOENT") return { attribution: null, events: {} };
+    throw error;
+  }
+}
+
+function attachMapLocation(event, geocodes) {
+  const location = geocodes[event.id];
+  const hasPoint = Number.isFinite(location?.lat) && Number.isFinite(location?.lng);
+  const eligible = hasPoint && event.address_quality === "usable";
+  return {
+    ...event,
+    map_eligible: eligible,
+    map_location: eligible
+      ? {
+          lat: location.lat,
+          lng: location.lng,
+          precision: location.precision || "approximate",
+          label: cleanString(location.label) || event.display_address,
+          anchor_id: cleanString(location.anchor_id) || event.id,
+          source: cleanString(location.source),
+          verified_premises: Boolean(location.verified_premises),
+        }
+      : null,
+  };
 }
 
 function toHistoryEvent(record, issueNumber) {

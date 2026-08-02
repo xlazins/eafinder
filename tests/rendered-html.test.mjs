@@ -20,8 +20,8 @@ test("server-renders the business evolution view", async () => {
     "utf8",
   );
   assert.match(html, /<title>Business Evolution \| SettatScope<\/title>/i);
-  assert.match(html, /Track business activity over time/);
-  assert.match(html, /Legal event timeline|Gazette history/i);
+  assert.match(html, /Business evolution on the map/);
+  assert.match(html, /Official Gazette layer/i);
   assert.doesNotMatch(html, /monthly rent|prototype|demo/i);
 });
 
@@ -36,6 +36,8 @@ test("builds a compact, deduplicated Gazette history database", async () => {
   assert.equal(dataset.coverage.source_record_count, 1618);
   assert.equal(dataset.coverage.settat_candidate_count, 25);
   assert.equal(dataset.coverage.event_count, 24);
+  assert.equal(dataset.coverage.mapped_event_count, 6);
+  assert.equal(dataset.coverage.mapped_anchor_count, 4);
   assert.equal(dataset.events.some((event) => "raw_text" in event), false);
 
   const kleat = dataset.events.find((event) => event.company_name === "KLEAT");
@@ -44,6 +46,8 @@ test("builds a compact, deduplicated Gazette history database", async () => {
   assert.equal(kleat.event_date, "2026-02-26");
   assert.equal(kleat.branch_address.includes("بير انزاران"), true);
   assert.equal(kleat.location_basis, "registry_context");
+  assert.equal(kleat.map_eligible, true);
+  assert.equal(kleat.map_location.precision, "street");
 
   const safres = dataset.events.find((event) => event.company_name === "SAFRES");
   assert.ok(safres);

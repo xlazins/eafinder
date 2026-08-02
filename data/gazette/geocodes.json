@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0.0",
+  "attribution": "Geocoded from OpenStreetMap data using a one-time, rate-limited Nominatim lookup. ODbL.",
+  "events": {
+    "boal-5922-x1jfrc": {
+      "lat": 32.9914488,
+      "lng": -7.6017199,
+      "precision": "neighborhood",
+      "label": "Mojamaa El Kheir area, Settat",
+      "anchor_id": "al-khair",
+      "source": "OpenStreetMap / Nominatim",
+      "verified_premises": false
+    },
+    "boal-5922-ozawsf": {
+      "lat": 32.9914488,
+      "lng": -7.6017199,
+      "precision": "neighborhood",
+      "label": "Mojamaa El Kheir area, Settat",
+      "anchor_id": "al-khair",
+      "source": "OpenStreetMap / Nominatim",
+      "verified_premises": false
+    },
+    "boal-5922-wmcw8x": {
+      "lat": 32.9975382,
+      "lng": -7.6187838,
+      "precision": "street",
+      "label": "Avenue Mohammed V, Settat",
+      "anchor_id": "mohammed-v",
+      "source": "OpenStreetMap",
+      "verified_premises": false
+    },
+    "boal-5922-147rtae": {
+      "lat": 32.9948048,
+      "lng": -7.6197182,
+      "precision": "street",
+      "label": "Avenue Bir Anzarane, Hay Mabrouka, Settat",
+      "anchor_id": "bir-anzarane-west",
+      "source": "OpenStreetMap / Nominatim",
+      "verified_premises": false
+    },
+    "boal-5922-82ge9t": {
+      "lat": 32.9974165,
+      "lng": -7.6152106,
+      "precision": "neighborhood",
+      "label": "Hay Mabrouka, Settat",
+      "anchor_id": "hay-mabrouka",
+      "source": "OpenStreetMap / Nominatim",
+      "verified_premises": false
+    },
+    "boal-5922-16p3e5l": {
+      "lat": 32.9914488,
+      "lng": -7.6017199,
+      "precision": "neighborhood",
+      "label": "Mojamaa El Kheir area, Settat",
+      "anchor_id": "al-khair",
+      "source": "OpenStreetMap / Nominatim",
+      "verified_premises": false
+    }
+  }
+}
