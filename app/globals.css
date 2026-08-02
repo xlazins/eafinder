@@ -1,18 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --ink: #1d211f;
-  --muted: #666d69;
-  --line: #dfe3e0;
-  --soft-line: #ecefed;
+  --ink: #1d1d1f;
+  --muted: #6e6e73;
+  --line: #d2d2d7;
+  --soft-line: #e8e8ed;
   --panel: #ffffff;
-  --soft: #f6f7f6;
-  --canvas: #e8ece9;
-  --red: #b4232f;
-  --red-dark: #8e1721;
-  --green: #16734c;
-  --amber: #b27616;
-  --shadow: 0 8px 24px rgba(23, 31, 27, 0.08);
+  --soft: #f5f5f7;
+  --canvas: #eeeeF2;
+  --blue: #0071e3;
+  --blue-dark: #0058b0;
+  --red: #d70015;
+  --red-dark: #b00012;
+  --green: #248a3d;
+  --amber: #b25000;
+  --shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -30,7 +32,8 @@ body {
   overflow: hidden;
   background: var(--canvas);
   color: var(--ink);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+  font-size: 15px;
 }
 
 button,
@@ -2261,5 +2264,1023 @@ label,
 
   .history-event-detail {
     border-top: 1px solid var(--line);
+  }
+}
+
+/* Unified SettatScope workspace */
+.unified-shell .app-header {
+  height: 68px;
+  padding: 0 24px;
+  border-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+}
+
+.unified-shell .brand-mark {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--blue);
+  font-size: 18px;
+}
+
+.unified-shell .brand-block strong {
+  font-size: 17px;
+  letter-spacing: 0;
+}
+
+.unified-shell .brand-block div span {
+  font-size: 12px;
+}
+
+.header-context {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+}
+
+.header-context strong {
+  font-size: 14px;
+  letter-spacing: 0;
+}
+
+.header-context span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.unified-shell .city-lock span {
+  font-size: 12px;
+}
+
+.unified-shell .city-lock strong {
+  font-size: 14px;
+}
+
+.unified-shell .workspace {
+  grid-template-columns: 320px minmax(500px, 1fr) 400px;
+  height: calc(100vh - 68px);
+  min-height: 640px;
+}
+
+.unified-shell .control-rail {
+  padding: 26px 22px 28px;
+}
+
+.unified-shell .rail-heading {
+  padding-bottom: 22px;
+}
+
+.unified-shell .rail-heading p {
+  margin-bottom: 7px;
+  color: var(--blue);
+  font-size: 12px;
+}
+
+.unified-shell .rail-heading h1 {
+  font-size: 25px;
+  line-height: 1.16;
+}
+
+.unified-shell .search-form,
+.unified-shell .field-group {
+  margin-top: 22px;
+}
+
+.unified-shell label,
+.unified-shell .selected-location > span {
+  margin-bottom: 8px;
+  color: #3a3a3c;
+  font-size: 13px;
+}
+
+.unified-shell .search-field {
+  grid-template-columns: 1fr 52px;
+}
+
+.unified-shell .search-field input,
+.unified-shell .field-group select,
+.history-control-field select,
+.unified-history-search input {
+  height: 44px;
+  border-color: #c7c7cc;
+  background: #ffffff;
+  font-size: 14px;
+}
+
+.unified-shell .search-field input {
+  border-radius: 8px 0 0 8px;
+  padding-inline: 13px;
+}
+
+.unified-shell .search-field button {
+  border-color: #c7c7cc;
+  border-radius: 0 8px 8px 0;
+  background: var(--soft);
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.unified-shell .field-group select,
+.history-control-field select {
+  border-radius: 8px;
+  padding-inline: 12px 30px;
+}
+
+.unified-shell .field-group small {
+  margin-top: 8px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.unified-shell .label-row output,
+.history-date-row output {
+  color: var(--blue);
+  font-size: 13px;
+}
+
+.unified-shell input[type="range"] {
+  accent-color: var(--blue);
+}
+
+.unified-shell .range-scale {
+  color: #8e8e93;
+  font-size: 11px;
+}
+
+.unified-shell .selected-location {
+  margin-top: 22px;
+  padding: 15px;
+  border-color: #d8d8dc;
+  border-radius: 8px;
+  background: var(--soft);
+}
+
+.unified-shell .selected-location strong {
+  font-size: 14px;
+}
+
+.unified-shell .selected-location small {
+  margin-top: 6px;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 11px;
+}
+
+.unified-shell .scan-button {
+  min-height: 46px;
+  margin-top: 18px;
+  border-radius: 8px;
+  background: var(--blue);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.unified-shell .scan-button:hover:not(:disabled) {
+  background: var(--blue-dark);
+}
+
+.unified-shell .rail-actions {
+  gap: 9px;
+  margin-top: 10px;
+}
+
+.unified-shell .rail-actions button {
+  min-height: 38px;
+  border-color: #d1d1d6;
+  border-radius: 8px;
+  color: #3a3a3c;
+  font-size: 12px;
+}
+
+.unified-history-controls {
+  margin: 24px -22px 0;
+  padding: 22px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.control-section-heading,
+.history-date-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.control-section-heading > div {
+  display: grid;
+  gap: 3px;
+}
+
+.control-section-heading span {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.control-section-heading strong {
+  font-size: 15px;
+}
+
+.control-section-heading button,
+.fit-history-summary button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.history-date-row {
+  align-items: baseline;
+  margin-top: 20px;
+}
+
+.history-date-row label {
+  margin: 0;
+}
+
+.history-date-row output {
+  font-weight: 700;
+}
+
+.unified-history-controls > input[type="range"] {
+  width: 100%;
+  margin: 8px 0 4px;
+}
+
+.history-control-field {
+  display: grid !important;
+  gap: 7px;
+  margin-top: 18px;
+}
+
+.history-control-field > span {
+  font-size: 13px;
+}
+
+.unified-review-toggle {
+  display: flex !important;
+  align-items: center;
+  gap: 9px;
+  margin: 15px 0 0 !important;
+  color: var(--muted) !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+.unified-review-toggle input,
+.unified-layer-control input {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  accent-color: var(--blue);
+}
+
+.unified-shell .selection-help {
+  margin-top: 18px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.unified-shell .map-canvas .leaflet-tile-pane {
+  filter: saturate(0.82) contrast(0.98) brightness(1.03);
+}
+
+.unified-shell .leaflet-container,
+.unified-shell .leaflet-tooltip {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+}
+
+.unified-shell .leaflet-tooltip {
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.unified-shell .candidate-marker {
+  background: var(--blue);
+  box-shadow: 0 4px 14px rgba(0, 74, 173, 0.28);
+}
+
+.unified-layer-control,
+.unified-map-date,
+.unified-shell .unified-map-legend {
+  position: absolute;
+  z-index: 450;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.unified-layer-control {
+  top: 16px;
+  left: 16px;
+  display: grid;
+  gap: 9px;
+  min-width: 205px;
+  padding: 12px 13px;
+}
+
+.unified-layer-control > strong {
+  font-size: 13px;
+}
+
+.unified-layer-control label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  color: #3a3a3c;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.unified-layer-control label:has(input:disabled) {
+  opacity: 0.45;
+}
+
+.unified-map-date {
+  top: 16px;
+  right: 16px;
+  display: grid;
+  gap: 3px;
+  padding: 11px 13px;
+  text-align: right;
+}
+
+.unified-map-date span {
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.unified-map-date strong {
+  font-size: 14px;
+}
+
+.unified-shell .unified-map-legend {
+  top: auto;
+  bottom: 18px;
+  left: 18px;
+  flex-wrap: wrap;
+  gap: 11px;
+  max-width: calc(100% - 92px);
+  padding: 10px 12px;
+  color: #3a3a3c;
+  font-size: 11px;
+}
+
+.history-added-dot {
+  background: var(--green);
+}
+
+.history-changed-dot {
+  background: var(--amber);
+}
+
+.history-ceased-dot {
+  background: var(--red);
+}
+
+.unified-history-marker-wrap {
+  background: transparent;
+  border: 0;
+}
+
+.unified-history-marker-wrap.outside-area {
+  opacity: 0.36;
+}
+
+.unified-history-marker {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  background: #3a3a3c;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.24);
+  color: #ffffff;
+}
+
+.unified-history-marker::after {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  width: 3px;
+  height: 8px;
+  background: inherit;
+  content: "";
+  transform: translateX(-50%);
+}
+
+.unified-history-marker.added {
+  background: var(--green);
+}
+
+.unified-history-marker.changed {
+  background: var(--amber);
+}
+
+.unified-history-marker.ceased {
+  background: var(--red);
+}
+
+.unified-history-marker.mixed {
+  background: #3a3a3c;
+}
+
+.unified-history-marker b {
+  font-size: 12px;
+}
+
+.unified-history-marker-wrap.selected .unified-history-marker {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.96), 0 0 0 6px rgba(0, 113, 227, 0.76);
+}
+
+.unified-shell .result-rail {
+  padding: 0 24px 30px;
+  border-left-color: rgba(0, 0, 0, 0.12);
+}
+
+.insight-tabs {
+  position: sticky;
+  z-index: 520;
+  top: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  margin: 0 -24px;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+}
+
+.insight-tabs button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 38px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.insight-tabs button.active {
+  background: #e9e9ee;
+  color: var(--ink);
+}
+
+.insight-tabs button > span {
+  display: grid;
+  place-items: center;
+  min-width: 21px;
+  height: 21px;
+  padding-inline: 5px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: var(--blue);
+  font-size: 11px;
+}
+
+.unified-shell .score-section {
+  padding: 26px 0 22px;
+}
+
+.unified-shell .result-kicker {
+  font-size: 11px;
+}
+
+.unified-shell .score-line > div strong {
+  font-size: 58px;
+}
+
+.unified-shell .score-line h2 {
+  font-size: 20px;
+}
+
+.unified-shell .score-section p,
+.unified-shell .source-note p,
+.unified-shell .empty-note {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.unified-shell .result-section {
+  padding: 22px 0;
+}
+
+.unified-shell .result-section h3,
+.unified-area-ledger h3,
+.record-history h3 {
+  font-size: 13px;
+}
+
+.unified-shell .metric-label {
+  font-size: 13px;
+}
+
+.unified-shell .metric-label strong {
+  font-size: 14px;
+}
+
+.unified-shell .evidence-grid strong {
+  font-size: 22px;
+}
+
+.unified-shell .evidence-grid span,
+.unified-shell .place-list li span,
+.unified-shell .breakdown-list,
+.unified-shell .source-note span {
+  font-size: 11px;
+}
+
+.unified-shell .place-list li strong {
+  font-size: 13px;
+}
+
+.fit-history-summary .section-title-row {
+  margin-bottom: 15px;
+}
+
+.fit-history-counts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--soft-line);
+  border-bottom: 1px solid var(--soft-line);
+}
+
+.fit-history-counts > div {
+  display: grid;
+  gap: 3px;
+  padding: 13px 8px;
+  border-right: 1px solid var(--soft-line);
+  text-align: center;
+}
+
+.fit-history-counts > div:last-child {
+  border-right: 0;
+}
+
+.fit-history-counts strong {
+  font-size: 20px;
+}
+
+.fit-history-counts span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.fit-history-summary > p {
+  margin: 13px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.history-area-header {
+  padding: 26px 0 22px;
+  border-bottom: 1px solid var(--line);
+}
+
+.history-area-header h2 {
+  margin: 14px 0 7px;
+  font-size: 24px;
+  letter-spacing: 0;
+}
+
+.history-area-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.unified-history-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--line);
+}
+
+.unified-history-stats > div {
+  display: grid;
+  gap: 4px;
+  padding: 17px 10px;
+  border-right: 1px solid var(--soft-line);
+  text-align: center;
+}
+
+.unified-history-stats > div:last-child {
+  border-right: 0;
+}
+
+.unified-history-stats span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.unified-history-stats strong {
+  font-size: 24px;
+}
+
+.unified-history-stats strong.added {
+  color: var(--green);
+}
+
+.unified-history-stats strong.changed {
+  color: var(--amber);
+}
+
+.unified-history-stats strong.ceased {
+  color: var(--red);
+}
+
+.unified-history-search,
+.unified-active-record,
+.unified-area-ledger,
+.unified-history-coverage {
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.unified-history-search label {
+  font-size: 13px;
+}
+
+.unified-history-search input {
+  width: 100%;
+  padding: 0 13px;
+  border: 1px solid #c7c7cc;
+  border-radius: 8px;
+}
+
+.record-heading h2 {
+  margin: 12px 0 6px;
+  overflow-wrap: anywhere;
+  font-size: 22px;
+  line-height: 1.18;
+}
+
+.record-heading > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.unified-active-record .status-label {
+  padding: 5px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+
+.record-facts {
+  display: grid;
+  gap: 0;
+  margin: 18px 0 0;
+}
+
+.record-facts > div {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid var(--soft-line);
+}
+
+.record-facts dt,
+.record-facts dd {
+  font-size: 12px;
+}
+
+.record-facts dt {
+  color: var(--muted);
+}
+
+.record-facts dd {
+  margin: 0;
+  text-align: right;
+}
+
+.record-address,
+.record-notice-details,
+.record-history {
+  padding-top: 19px;
+  border-top: 1px solid var(--soft-line);
+}
+
+.record-address h3,
+.record-notice-details h3,
+.record-history h3 {
+  margin: 0 0 9px;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.record-address p,
+.record-notice-details p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.record-address > span,
+.record-notice-details > span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.record-history {
+  margin-top: 19px;
+}
+
+.record-history ol {
+  display: grid;
+  gap: 10px;
+  margin: 13px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.record-history li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.record-history li > i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+.record-history li > i.added {
+  background: var(--green);
+}
+
+.record-history li > i.changed {
+  background: var(--amber);
+}
+
+.record-history li > i.ceased {
+  background: var(--red);
+}
+
+.record-history li > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.record-history li strong {
+  color: var(--ink);
+}
+
+.record-caveat {
+  margin: 19px 0 0;
+  padding: 12px;
+  border-left: 3px solid var(--amber);
+  background: #fff8ee;
+  color: #6d4517;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.unified-event-list {
+  margin: 14px -24px 0;
+}
+
+.unified-event-list > button {
+  display: grid;
+  grid-template-columns: 9px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 13px 24px;
+  border: 0;
+  border-top: 1px solid var(--soft-line);
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+}
+
+.unified-event-list > button:hover,
+.unified-event-list > button.active {
+  background: var(--soft);
+}
+
+.unified-event-list > button.active {
+  box-shadow: inset 3px 0 0 var(--blue);
+}
+
+.unified-event-list > button > i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+.unified-event-list > button > i.added {
+  background: var(--green);
+}
+
+.unified-event-list > button > i.changed {
+  background: var(--amber);
+}
+
+.unified-event-list > button > i.ceased {
+  background: var(--red);
+}
+
+.unified-event-list > button > span {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.unified-event-list strong {
+  overflow: hidden;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.unified-event-list small,
+.unified-event-list em {
+  color: var(--muted);
+  font-size: 11px;
+  font-style: normal;
+}
+
+.unified-unmapped-records {
+  margin-inline: -24px;
+  border-bottom: 1px solid var(--line);
+}
+
+.unified-unmapped-records summary {
+  padding: 17px 24px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.45;
+  cursor: pointer;
+}
+
+.unified-unmapped-records > div {
+  border-top: 1px solid var(--soft-line);
+}
+
+.unified-unmapped-records button {
+  display: grid;
+  gap: 4px;
+  width: 100%;
+  padding: 12px 24px;
+  border: 0;
+  border-bottom: 1px solid var(--soft-line);
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+}
+
+.unified-unmapped-records button:hover {
+  background: var(--soft);
+}
+
+.unified-unmapped-records button strong {
+  overflow: hidden;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.unified-unmapped-records button span {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.unified-history-coverage strong {
+  font-size: 13px;
+}
+
+.unified-history-coverage p {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1180px) {
+  .unified-shell .workspace {
+    grid-template-columns: 300px minmax(440px, 1fr) 370px;
+  }
+}
+
+@media (max-width: 960px) {
+  body {
+    overflow: auto;
+  }
+
+  .unified-shell .workspace {
+    grid-template-columns: 300px minmax(0, 1fr);
+    grid-template-rows: 650px auto;
+    height: auto;
+  }
+
+  .unified-shell .result-rail {
+    grid-column: 1 / -1;
+    min-height: 560px;
+    border-top: 1px solid var(--line);
+    border-left: 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .unified-shell .app-header {
+    grid-template-columns: 1fr auto;
+    height: 62px;
+    padding-inline: 14px;
+  }
+
+  .header-context,
+  .unified-shell .city-lock {
+    display: none;
+  }
+
+  .unified-shell .workspace {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .unified-shell .control-rail,
+  .unified-shell .result-rail {
+    overflow: visible;
+  }
+
+  .unified-shell .control-rail {
+    padding: 22px 18px 26px;
+  }
+
+  .unified-history-controls {
+    margin-inline: -18px;
+    padding-inline: 18px;
+  }
+
+  .unified-shell .map-stage {
+    min-height: 520px;
+  }
+
+  .unified-layer-control {
+    top: 10px;
+    left: 10px;
+    min-width: 190px;
+  }
+
+  .unified-map-date {
+    top: auto;
+    right: 10px;
+    bottom: 62px;
+  }
+
+  .unified-shell .unified-map-legend {
+    bottom: 12px;
+    left: 10px;
+    max-width: calc(100% - 72px);
+  }
+
+  .unified-shell .result-rail {
+    padding-inline: 18px;
+  }
+
+  .insight-tabs {
+    margin-inline: -18px;
+    padding-inline: 18px;
+  }
+
+  .unified-event-list,
+  .unified-unmapped-records {
+    margin-inline: -18px;
+  }
+
+  .unified-event-list > button,
+  .unified-unmapped-records summary,
+  .unified-unmapped-records button {
+    padding-inline: 18px;
   }
 }

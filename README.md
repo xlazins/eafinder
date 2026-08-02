@@ -2,8 +2,8 @@
 
 Small-area business location analysis for Settat, Morocco.
 
-SettatScope lets a user choose an exact point on a real map, select a business
-type, and analyze a 300-1000 metre walking area. It scores:
+SettatScope uses one shared map and one selected 300-1500 metre area for every
+feature. A user chooses a point and business type, then the platform scores:
 
 - demand signals;
 - direct competition;
@@ -13,18 +13,18 @@ type, and analyze a 300-1000 metre walking area. It scores:
 The result includes nearby competitors, demand generators, mapped buildings,
 roads, a location-fit score, and a data-confidence indicator.
 
-The Business evolution view places dated official company events on the same
-Settat map. A user can choose a 300-1800 metre area, move an `as of` control
-through the available Gazette dates, compare additions, changes and closures,
-and inspect the source notice for each company. Locations are explicitly marked
-as building, street or neighborhood-level so an approximate address is never
-presented as an exact storefront.
+The same map also places dated official company events inside the selected
+area. A user can move an `as of` control through the available Gazette dates,
+compare additions, changes and closures, and inspect the source notice for each
+company without leaving the map. Locations are explicitly marked as building,
+street or neighborhood-level so an approximate address is never presented as
+an exact storefront.
 
 ## Data
 
 The application uses a bundled OpenStreetMap snapshot for Settat. The browser
-does not depend on the Overpass API while running an analysis. Map tiles and
-address search still require internet access.
+does not depend on the Overpass API while running an analysis. Map tiles require
+internet access; Settat place search reads the bundled snapshot.
 
 OpenStreetMap data is available under the ODbL and is attributed in the
 interface.
@@ -71,6 +71,6 @@ npm test
 npm run lint
 ```
 
-The main product is implemented in `app/page.tsx`. The Settat dataset is stored
-at `public/data/settat-osm.json`, and the timestamped company map is implemented
-in `app/evolution/page.tsx`.
+The unified product is implemented in `app/page.tsx`. The Settat dataset is
+stored at `public/data/settat-osm.json`; `/evolution` only redirects old links
+back to the unified map.

@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Link from "next/link";
 
 type Point = { lat: number; lng: number };
 type OSMTags = Record<string, string>;
@@ -48,6 +47,63 @@ type ScanResult = {
   timestamp: string;
 };
 
+type StatusEffect = "added" | "ceased" | "changed";
+type LocationBasis = "address_match" | "registry_context" | "city_mention";
+type MapPrecision = "building" | "street" | "neighborhood" | "approximate";
+
+type HistoryEvent = {
+  id: string;
+  company_id: string;
+  company_name: string;
+  legal_form: string | null;
+  commercial_register_number: string | null;
+  event_type: string;
+  event_date: string;
+  effective_date: string | null;
+  status_effect: StatusEffect;
+  business_purpose: string | null;
+  manager_or_liquidator: string | null;
+  registered_address: string | null;
+  branch_address: string | null;
+  display_address: string | null;
+  location_basis: LocationBasis;
+  map_eligible: boolean;
+  map_location: {
+    lat: number;
+    lng: number;
+    precision: MapPrecision;
+    label: string;
+    anchor_id: string;
+    source: string | null;
+    verified_premises: boolean;
+  } | null;
+  filing: {
+    court: string | null;
+    date: string | null;
+    number: string | null;
+  };
+  needs_review: boolean;
+  source: {
+    issue_number: string;
+    publication_date: string | null;
+    pdf_pages: number[];
+    printed_pages: string[];
+    notice_reference: string | null;
+  };
+};
+
+type HistoryDataset = {
+  coverage: {
+    issue_count: number;
+    event_count: number;
+    mapped_event_count: number;
+    unmapped_event_count: number;
+    mapped_anchor_count: number;
+    needs_review_count: number;
+  };
+  events: HistoryEvent[];
+};
+
 type BusinessProfile = {
   label: string;
   description: string;
@@ -77,11 +133,16 @@ type LeafletCircleMarker = LeafletLayer & {
   bindTooltip: (content: string, options?: Record<string, unknown>) => LeafletCircleMarker;
 };
 
+type LeafletMarker = LeafletLayer & {
+  bindTooltip: (content: string, options?: Record<string, unknown>) => LeafletMarker;
+  on: (event: string, handler: () => void) => LeafletMarker;
+};
+
 type LeafletApi = {
   map: (node: HTMLDivElement, options?: Record<string, unknown>) => LeafletMap;
   tileLayer: (url: string, options?: Record<string, unknown>) => LeafletLayer;
   circle: (point: number[], options?: Record<string, unknown>) => LeafletCircle;
-  marker: (point: number[], options?: Record<string, unknown>) => LeafletLayer;
+  marker: (point: number[], options?: Record<string, unknown>) => LeafletMarker;
   circleMarker: (point: number[], options?: Record<string, unknown>) => LeafletCircleMarker;
   divIcon: (options?: Record<string, unknown>) => unknown;
   control: {
@@ -407,6 +468,63 @@ function formatDistance(value: number) {
   return value < 1000 ? `${value} m` : `${(value / 1000).toFixed(1)} km`;
 }
 
+const EVENT_LABELS: Record<string, string> = {
+  INCORPORATION: "Incorporation",
+  BRANCH_OPENING: "Branch created",
+  DISSOLUTION: "Dissolution",
+  LIQUIDATION: "Liquidation",
+  LIQUIDATION_CLOSED: "Liquidation closed",
+  REMOVAL_FROM_REGISTER: "Removed from register",
+  REGISTERED_OFFICE_CHANGE: "Registered office changed",
+  SHARE_TRANSFER: "Share transfer",
+  MANAGER_CHANGE: "Manager changed",
+  CAPITAL_CHANGE: "Capital changed",
+  LEGAL_FORM_CHANGE: "Legal form changed",
+  BUSINESS_PURPOSE_CHANGE: "Business purpose changed",
+};
+
+const PRECISION_LABELS: Record<MapPrecision, string> = {
+  building: "Building-level",
+  street: "Street-level approximation",
+  neighborhood: "Neighborhood-level approximation",
+  approximate: "Approximate location",
+};
+
+function eventLabel(value: string) {
+  return EVENT_LABELS[value] || value.toLocaleLowerCase().replaceAll("_", " ");
+}
+
+function formatHistoryDate(value: string | null) {
+  if (!value) return "Date unavailable";
+  return new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${value}T00:00:00Z`));
+}
+
+function escapeHtml(value: string) {
+  return value.replace(/[&<>"']/gu, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  })[character] || character);
+}
+
+function sourceLabel(event: HistoryEvent) {
+  const parts = [`BOAL ${event.source.issue_number}`];
+  if (event.source.notice_reference) parts.push(`ref. ${event.source.notice_reference}`);
+  if (event.source.printed_pages.length) {
+    parts.push(`p. ${event.source.printed_pages.join(", ")}`);
+  } else if (event.source.pdf_pages.length) {
+    parts.push(`PDF p. ${event.source.pdf_pages.join(", ")}`);
+  }
+  return parts.join(" | ");
+}
+
 function MetricRow({
   label,
   value,
@@ -441,16 +559,196 @@ function MetricRow({
   );
 }
 
+function HistoryPanel({
+  dataset,
+  error,
+  asOfDate,
+  query,
+  onQueryChange,
+  areaEvents,
+  counts,
+  activeEvent,
+  companyHistory,
+  unmappedEvents,
+  onSelect,
+}: {
+  dataset: HistoryDataset | null;
+  error: string;
+  asOfDate: string | null;
+  query: string;
+  onQueryChange: (value: string) => void;
+  areaEvents: Array<{ event: HistoryEvent; distance: number }>;
+  counts: Record<StatusEffect, number>;
+  activeEvent: HistoryEvent | null;
+  companyHistory: HistoryEvent[];
+  unmappedEvents: HistoryEvent[];
+  onSelect: (event: HistoryEvent) => void;
+}) {
+  if (error) {
+    return (
+      <div className="result-state">
+        <span className="state-symbol">!</span>
+        <h2>Gazette history unavailable</h2>
+        <p>{error}</p>
+      </div>
+    );
+  }
+
+  if (!dataset) {
+    return (
+      <div className="result-state">
+        <span className="large-spinner" aria-hidden="true" />
+        <h2>Loading business history</h2>
+      </div>
+    );
+  }
+
+  return (
+    <div className="unified-history-panel">
+      <section className="history-area-header">
+        <div className="result-kicker">
+          <span>Selected area through {formatHistoryDate(asOfDate)}</span>
+          <span>{areaEvents.length} mapped events</span>
+        </div>
+        <h2>Business evolution</h2>
+        <p>Official legal activity located within the same radius used by the location analysis.</p>
+      </section>
+
+      <section className="unified-history-stats" aria-label="Area legal activity">
+        <div><span>Added</span><strong className="added">{counts.added}</strong></div>
+        <div><span>Changed</span><strong className="changed">{counts.changed}</strong></div>
+        <div><span>Ceased</span><strong className="ceased">{counts.ceased}</strong></div>
+      </section>
+
+      <section className="unified-history-search">
+        <label htmlFor="company-search">Search Gazette records</label>
+        <input
+          id="company-search"
+          type="search"
+          value={query}
+          onChange={(event) => onQueryChange(event.target.value)}
+          placeholder="Company, RC or address"
+        />
+      </section>
+
+      {activeEvent && (
+        <section className="unified-active-record">
+          <div className="record-heading">
+            <span className={`status-label ${activeEvent.status_effect}`}>
+              {eventLabel(activeEvent.event_type)}
+            </span>
+            <h2>{activeEvent.company_name}</h2>
+            <p>{sourceLabel(activeEvent)}</p>
+          </div>
+
+          <dl className="record-facts">
+            <div><dt>Legal event</dt><dd>{formatHistoryDate(activeEvent.event_date)}</dd></div>
+            <div><dt>Legal form</dt><dd>{activeEvent.legal_form || "Unavailable"}</dd></div>
+            <div><dt>Commercial register</dt><dd>{activeEvent.commercial_register_number || "Unavailable"}</dd></div>
+          </dl>
+
+          <div className="record-address">
+            <h3>Gazette address</h3>
+            <p dir="auto">{activeEvent.display_address || "No usable address was extracted."}</p>
+            {activeEvent.map_location ? (
+              <span>
+                {activeEvent.map_location.label} | {PRECISION_LABELS[activeEvent.map_location.precision]}
+              </span>
+            ) : (
+              <span>No defensible map point yet</span>
+            )}
+          </div>
+
+          {(activeEvent.business_purpose || activeEvent.manager_or_liquidator) && (
+            <div className="record-notice-details">
+              <h3>Notice details</h3>
+              {activeEvent.business_purpose && <p dir="auto">{activeEvent.business_purpose}</p>}
+              {activeEvent.manager_or_liquidator && (
+                <span dir="auto">Manager or liquidator: {activeEvent.manager_or_liquidator}</span>
+              )}
+            </div>
+          )}
+
+          <div className="record-history">
+            <div className="section-title-row">
+              <h3>Company history</h3>
+              <span>{companyHistory.length} event{companyHistory.length === 1 ? "" : "s"}</span>
+            </div>
+            <ol>
+              {companyHistory.map((event) => (
+                <li key={event.id}>
+                  <i className={event.status_effect} />
+                  <span><strong>{eventLabel(event.event_type)}</strong>{formatHistoryDate(event.event_date)}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <p className="record-caveat">
+            Gazette dates describe legal events, not necessarily the day a storefront opened or closed.
+          </p>
+        </section>
+      )}
+
+      <section className="unified-area-ledger">
+        <div className="section-title-row">
+          <h3>Events inside the circle</h3>
+          <span>{areaEvents.length}</span>
+        </div>
+        {areaEvents.length ? (
+          <div className="unified-event-list">
+            {areaEvents.map(({ event, distance }) => (
+              <button
+                key={event.id}
+                type="button"
+                className={activeEvent?.id === event.id ? "active" : ""}
+                onClick={() => onSelect(event)}
+              >
+                <i className={event.status_effect} />
+                <span>
+                  <strong>{event.company_name}</strong>
+                  <small>{eventLabel(event.event_type)} | {formatHistoryDate(event.event_date)}</small>
+                </span>
+                <em>{formatDistance(distance)}</em>
+              </button>
+            ))}
+          </div>
+        ) : (
+          <p className="empty-note">No mapped legal events match this area, date, and filter.</p>
+        )}
+      </section>
+
+      <details className="unified-unmapped-records">
+        <summary>{unmappedEvents.length} filtered records without a reliable map point</summary>
+        <div>
+          {unmappedEvents.map((event) => (
+            <button key={event.id} type="button" onClick={() => onSelect(event)}>
+              <strong>{event.company_name}</strong>
+              <span>{eventLabel(event.event_type)} | {formatHistoryDate(event.event_date)}</span>
+            </button>
+          ))}
+        </div>
+      </details>
+
+      <section className="unified-history-coverage">
+        <strong>{dataset.coverage.mapped_event_count} of {dataset.coverage.event_count} events mapped</strong>
+        <p>Uncertain OCR addresses stay searchable but are not assigned false coordinates.</p>
+      </section>
+    </div>
+  );
+}
+
 export default function Home() {
   const mapNodeRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<LeafletMap | null>(null);
   const locationMarkerRef = useRef<LeafletLayer | null>(null);
   const radiusLayerRef = useRef<LeafletCircle | null>(null);
   const evidenceLayersRef = useRef<LeafletLayer[]>([]);
+  const historyLayersRef = useRef<LeafletLayer[]>([]);
   const requestRef = useRef<AbortController | null>(null);
 
   const [businessKey, setBusinessKey] = useState("cafe");
-  const [radius, setRadius] = useState(600);
+  const [radius, setRadius] = useState(800);
   const [point, setPoint] = useState<Point>(SETTAT_CENTER);
   const [query, setQuery] = useState("");
   const [locationLabel, setLocationLabel] = useState("Settat city centre");
@@ -458,8 +756,39 @@ export default function Home() {
   const [error, setError] = useState("");
   const [result, setResult] = useState<ScanResult | null>(null);
   const [mapReady, setMapReady] = useState(false);
+  const [activePanel, setActivePanel] = useState<"fit" | "history">("fit");
+  const [historyDataset, setHistoryDataset] = useState<HistoryDataset | null>(null);
+  const [historyError, setHistoryError] = useState("");
+  const [historyQuery, setHistoryQuery] = useState("");
+  const [historyStatus, setHistoryStatus] = useState<"all" | StatusEffect>("all");
+  const [includeReview, setIncludeReview] = useState(true);
+  const [asOfIndex, setAsOfIndex] = useState(0);
+  const [selectedEventId, setSelectedEventId] = useState<string | null>(null);
+  const [showOSMEvidence, setShowOSMEvidence] = useState(true);
+  const [showHistory, setShowHistory] = useState(true);
 
   const profile = BUSINESS_PROFILES[businessKey];
+
+  useEffect(() => {
+    let active = true;
+    fetch("/data/settat-business-history.json")
+      .then((response) => {
+        if (!response.ok) throw new Error(`History data returned ${response.status}`);
+        return response.json() as Promise<HistoryDataset>;
+      })
+      .then((value) => {
+        if (!active) return;
+        setHistoryDataset(value);
+        const availableDates = [...new Set(value.events.map((event) => event.event_date))].sort();
+        setAsOfIndex(Math.max(0, availableDates.length - 1));
+      })
+      .catch(() => {
+        if (active) setHistoryError("Gazette history could not be loaded.");
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   const updateLocationLayers = useCallback((nextPoint: Point, nextRadius: number) => {
     const L = getLeaflet();
@@ -471,11 +800,11 @@ export default function Home() {
 
     radiusLayerRef.current = L.circle([nextPoint.lat, nextPoint.lng], {
       radius: nextRadius,
-      color: "#b4232f",
+      color: "#0071e3",
       weight: 2,
       opacity: 0.9,
-      fillColor: "#b4232f",
-      fillOpacity: 0.055,
+      fillColor: "#0071e3",
+      fillOpacity: 0.06,
     }).addTo(map);
 
     locationMarkerRef.current = L.marker([nextPoint.lat, nextPoint.lng], {
@@ -528,6 +857,7 @@ export default function Home() {
     return () => {
       window.clearInterval(connect);
       requestRef.current?.abort();
+      historyLayersRef.current.forEach((layer) => layer.remove());
       if (mapRef.current) {
         mapRef.current.remove();
         mapRef.current = null;
@@ -540,6 +870,123 @@ export default function Home() {
     updateLocationLayers(point, radius);
   }, [mapReady, point, radius, updateLocationLayers]);
 
+  const historyDates = useMemo(
+    () => [...new Set((historyDataset?.events || []).map((event) => event.event_date))].sort(),
+    [historyDataset],
+  );
+  const asOfDate = historyDates[
+    Math.min(asOfIndex, Math.max(0, historyDates.length - 1))
+  ] || null;
+
+  const visibleHistoryEvents = useMemo(() => {
+    const needle = historyQuery.trim().toLocaleLowerCase();
+    return (historyDataset?.events || []).filter((event) => {
+      const searchText = [
+        event.company_name,
+        event.commercial_register_number,
+        event.display_address,
+        event.business_purpose,
+      ].filter(Boolean).join(" ").toLocaleLowerCase();
+      return (
+        (!asOfDate || event.event_date <= asOfDate) &&
+        (historyStatus === "all" || event.status_effect === historyStatus) &&
+        (includeReview || !event.needs_review) &&
+        (!needle || searchText.includes(needle))
+      );
+    });
+  }, [asOfDate, historyDataset, historyQuery, historyStatus, includeReview]);
+
+  const mappedHistoryEvents = useMemo(
+    () => visibleHistoryEvents.filter((event) => event.map_eligible && event.map_location),
+    [visibleHistoryEvents],
+  );
+
+  const areaHistoryEvents = useMemo(
+    () => mappedHistoryEvents
+      .map((event) => ({
+        event,
+        distance: distanceMeters(point, event.map_location!),
+      }))
+      .filter((item) => item.distance <= radius)
+      .sort((left, right) => (
+        right.event.event_date.localeCompare(left.event.event_date) ||
+        left.event.company_name.localeCompare(right.event.company_name, "en")
+      )),
+    [mappedHistoryEvents, point, radius],
+  );
+
+  const unmappedHistoryEvents = useMemo(
+    () => visibleHistoryEvents
+      .filter((event) => !event.map_eligible)
+      .sort((left, right) => right.event_date.localeCompare(left.event_date)),
+    [visibleHistoryEvents],
+  );
+
+  const historyCounts = useMemo(() => areaHistoryEvents.reduce(
+    (counts, item) => {
+      counts[item.event.status_effect] += 1;
+      return counts;
+    },
+    { added: 0, changed: 0, ceased: 0 }),
+  [areaHistoryEvents]);
+
+  const activeHistoryEvent = useMemo(() => {
+    const selected = visibleHistoryEvents.find((event) => event.id === selectedEventId);
+    return selected || areaHistoryEvents[0]?.event || null;
+  }, [areaHistoryEvents, selectedEventId, visibleHistoryEvents]);
+
+  const companyHistory = useMemo(() => (
+    activeHistoryEvent
+      ? (historyDataset?.events || [])
+        .filter((event) => event.company_id === activeHistoryEvent.company_id)
+        .sort((left, right) => left.event_date.localeCompare(right.event_date))
+      : []
+  ), [activeHistoryEvent, historyDataset]);
+
+  useEffect(() => {
+    const L = getLeaflet();
+    const map = mapRef.current;
+    if (!mapReady || !L || !map) return;
+
+    historyLayersRef.current.forEach((layer) => layer.remove());
+    historyLayersRef.current = [];
+    if (!showHistory) return;
+
+    const groups = new Map<string, HistoryEvent[]>();
+    for (const event of mappedHistoryEvents) {
+      const key = event.map_location!.anchor_id;
+      groups.set(key, [...(groups.get(key) || []), event]);
+    }
+
+    for (const events of groups.values()) {
+      const ordered = events.toSorted((left, right) => right.event_date.localeCompare(left.event_date));
+      const latest = ordered[0];
+      const location = latest.map_location!;
+      const inArea = distanceMeters(point, location) <= radius;
+      const statuses = new Set(events.map((event) => event.status_effect));
+      const tone = statuses.size === 1 ? latest.status_effect : "mixed";
+      const selected = events.some((event) => event.id === activeHistoryEvent?.id);
+      const marker = L.marker([location.lat, location.lng], {
+        icon: L.divIcon({
+          className: `unified-history-marker-wrap ${inArea ? "in-area" : "outside-area"} ${selected ? "selected" : ""}`,
+          html: `<span class="unified-history-marker ${tone}"><b>${events.length}</b></span>`,
+          iconSize: [42, 46],
+          iconAnchor: [21, 42],
+        }),
+      })
+        .bindTooltip(
+          `<strong>${escapeHtml(location.label)}</strong><br>${events.length} Gazette event${events.length === 1 ? "" : "s"} | ${escapeHtml(PRECISION_LABELS[location.precision])}`,
+          { direction: "top", offset: [0, -28] },
+        )
+        .on("click", () => {
+          setSelectedEventId(latest.id);
+          setActivePanel("history");
+        })
+        .addTo(map);
+      historyLayersRef.current.push(marker);
+    }
+  }, [activeHistoryEvent?.id, mapReady, mappedHistoryEvents, point, radius, showHistory]);
+
   const clearEvidenceLayers = useCallback(() => {
     evidenceLayersRef.current.forEach((layer) => layer.remove());
     evidenceLayersRef.current = [];
@@ -551,6 +998,7 @@ export default function Home() {
       const map = mapRef.current;
       if (!L || !map) return;
       clearEvidenceLayers();
+      if (!showOSMEvidence) return;
 
       const addDots = (places: NearbyPlace[], color: string, max: number) => {
         places.slice(0, max).forEach((place) => {
@@ -562,7 +1010,7 @@ export default function Home() {
             fillOpacity: 0.95,
           })
             .bindTooltip(
-              `<strong>${place.name}</strong><br>${place.kind} · ${formatDistance(place.distance)}`,
+              `<strong>${escapeHtml(place.name)}</strong><br>${escapeHtml(place.kind)} | ${formatDistance(place.distance)}`,
               { direction: "top", offset: [0, -5] },
             )
             .addTo(map);
@@ -573,8 +1021,14 @@ export default function Home() {
       addDots(scan.demandPlaces, "#16734c", 70);
       addDots(scan.competitors, "#b4232f", 40);
     },
-    [clearEvidenceLayers],
+    [clearEvidenceLayers, showOSMEvidence],
   );
+
+  useEffect(() => {
+    if (!result) return;
+    if (showOSMEvidence) showEvidenceOnMap(result);
+    else clearEvidenceLayers();
+  }, [clearEvidenceLayers, result, showEvidenceOnMap, showOSMEvidence]);
 
   const runScan = useCallback(async () => {
     requestRef.current?.abort();
@@ -665,7 +1119,7 @@ export default function Home() {
   const maxBreakdown = sortedBreakdown[0]?.[1] || 1;
 
   return (
-    <main className="product-shell">
+    <main className="product-shell unified-shell">
       <header className="app-header">
         <div className="brand-block">
           <span className="brand-mark">S</span>
@@ -674,10 +1128,10 @@ export default function Home() {
             <span>Business location intelligence</span>
           </div>
         </div>
-        <nav className="app-nav" aria-label="Primary navigation">
-          <Link className="active" href="/">Location fit</Link>
-          <Link href="/evolution">Business evolution</Link>
-        </nav>
+        <div className="header-context">
+          <strong>Settat intelligence map</strong>
+          <span>Location fit and business evolution</span>
+        </div>
         <div className="city-lock">
           <span>City</span>
           <strong>Settat, Morocco</strong>
@@ -687,8 +1141,8 @@ export default function Home() {
       <section className="workspace">
         <aside className="control-rail" aria-label="Location scan controls">
           <div className="rail-heading">
-            <p>New location scan</p>
-            <h1>Choose a business and a precise point.</h1>
+            <p>Explore Settat</p>
+            <h1>Analyze one area from every available signal.</h1>
           </div>
 
           <form className="search-form" onSubmit={searchLocation}>
@@ -702,7 +1156,7 @@ export default function Home() {
                 autoComplete="off"
               />
               <button type="submit" aria-label="Search address" title="Search address">
-                <span aria-hidden="true">⌕</span>
+                Go
               </button>
             </div>
           </form>
@@ -737,7 +1191,7 @@ export default function Home() {
               id="radius"
               type="range"
               min="300"
-              max="1000"
+              max="1500"
               step="100"
               value={radius}
               onChange={(event) => {
@@ -749,7 +1203,7 @@ export default function Home() {
             />
             <div className="range-scale">
               <span>300 m</span>
-              <span>1 km</span>
+              <span>1.5 km</span>
             </div>
           </div>
 
@@ -788,16 +1242,104 @@ export default function Home() {
             </button>
           </div>
 
+          <section className="unified-history-controls">
+            <div className="control-section-heading">
+              <div>
+                <span>Business evolution</span>
+                <strong>Official Gazette timeline</strong>
+              </div>
+              <button type="button" onClick={() => setActivePanel("history")}>View</button>
+            </div>
+
+            <div className="history-date-row">
+              <label htmlFor="history-date">Observed through</label>
+              <output htmlFor="history-date">{formatHistoryDate(asOfDate)}</output>
+            </div>
+            <input
+              id="history-date"
+              type="range"
+              min="0"
+              max={Math.max(0, historyDates.length - 1)}
+              step="1"
+              value={Math.min(asOfIndex, Math.max(0, historyDates.length - 1))}
+              onChange={(event) => {
+                setAsOfIndex(Number(event.target.value));
+                setSelectedEventId(null);
+              }}
+            />
+            <div className="range-scale">
+              <span>{formatHistoryDate(historyDates[0] || null)}</span>
+              <span>{formatHistoryDate(historyDates.at(-1) || null)}</span>
+            </div>
+
+            <label className="history-control-field">
+              <span>Legal activity</span>
+              <select
+                value={historyStatus}
+                onChange={(event) => setHistoryStatus(event.target.value as "all" | StatusEffect)}
+              >
+                <option value="all">All legal activity</option>
+                <option value="added">New entities and branches</option>
+                <option value="changed">Company changes</option>
+                <option value="ceased">Dissolutions and closures</option>
+              </select>
+            </label>
+
+            <label className="unified-review-toggle">
+              <input
+                type="checkbox"
+                checked={includeReview}
+                onChange={(event) => setIncludeReview(event.target.checked)}
+              />
+              <span>Include records needing review</span>
+            </label>
+          </section>
+
           <p className="selection-help">
-            Click anywhere inside Settat to move the candidate point. The red circle is the exact area analyzed.
+            Click anywhere inside Settat to move the shared analysis area. Every feature uses this same circle.
           </p>
         </aside>
 
         <section className="map-stage" aria-label="Settat business analysis map">
           <div ref={mapNodeRef} className="map-canvas" />
-          <div className="map-legend" aria-label="Map legend">
-            <span><i className="legend-dot demand-dot" />Demand generator</span>
-            <span><i className="legend-dot competitor-dot" />Direct competitor</span>
+          <div className="unified-layer-control" aria-label="Map layers">
+            <strong>Map layers</strong>
+            <label>
+              <input
+                type="checkbox"
+                checked={showOSMEvidence}
+                onChange={(event) => setShowOSMEvidence(event.target.checked)}
+                disabled={!result}
+              />
+              <span>Nearby business signals</span>
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                checked={showHistory}
+                onChange={(event) => setShowHistory(event.target.checked)}
+              />
+              <span>Gazette legal events</span>
+            </label>
+          </div>
+          <div className="unified-map-date">
+            <span>Gazette through</span>
+            <strong>{formatHistoryDate(asOfDate)}</strong>
+          </div>
+          <div className="map-legend unified-map-legend" aria-label="Map legend">
+            {result && showOSMEvidence && (
+              <>
+                <span><i className="legend-dot demand-dot" />Demand</span>
+                <span><i className="legend-dot competitor-dot" />Competitor</span>
+              </>
+            )}
+            {showHistory && (
+              <>
+                <span><i className="legend-dot history-added-dot" />Added</span>
+                <span><i className="legend-dot history-changed-dot" />Changed</span>
+                <span><i className="legend-dot history-ceased-dot" />Ceased</span>
+              </>
+            )}
           </div>
           {!mapReady && (
             <div className="map-loading">
@@ -808,7 +1350,29 @@ export default function Home() {
         </section>
 
         <aside className="result-rail" aria-live="polite">
-          {status === "ready" && result ? (
+          <div className="insight-tabs" role="tablist" aria-label="Area insights">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activePanel === "fit"}
+              className={activePanel === "fit" ? "active" : ""}
+              onClick={() => setActivePanel("fit")}
+            >
+              Location fit
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activePanel === "history"}
+              className={activePanel === "history" ? "active" : ""}
+              onClick={() => setActivePanel("history")}
+            >
+              Business history
+              <span>{areaHistoryEvents.length}</span>
+            </button>
+          </div>
+
+          {activePanel === "fit" ? (status === "ready" && result ? (
             <>
               <section className="score-section">
                 <div className="result-kicker">
@@ -883,6 +1447,19 @@ export default function Home() {
                 </div>
               </section>
 
+              <section className="result-section fit-history-summary">
+                <div className="section-title-row">
+                  <h3>Gazette activity</h3>
+                  <button type="button" onClick={() => setActivePanel("history")}>Open history</button>
+                </div>
+                <div className="fit-history-counts">
+                  <div><strong>{historyCounts.added}</strong><span>added</span></div>
+                  <div><strong>{historyCounts.changed}</strong><span>changed</span></div>
+                  <div><strong>{historyCounts.ceased}</strong><span>ceased</span></div>
+                </div>
+                <p>{areaHistoryEvents.length} mapped legal events inside this same {radius} m area through {formatHistoryDate(asOfDate)}.</p>
+              </section>
+
               <section className="source-note">
                 <strong>How to use this result</strong>
                 <p>
@@ -910,14 +1487,28 @@ export default function Home() {
             <div className="result-state initial">
               <span className="state-symbol target-symbol">+</span>
               <h2>Ready to analyze</h2>
-              <p>Select a business, choose the exact point on the map, then run the location analysis.</p>
+              <p>Select a business and point, then analyze the same area used by the Gazette timeline.</p>
               <div className="method-list">
                 <span>Direct competition</span>
                 <span>Demand generators</span>
-                <span>Buildings and streets</span>
-                <span>Transit and access</span>
+                <span>Streets and access</span>
+                <span>Official company history</span>
               </div>
             </div>
+          )) : (
+            <HistoryPanel
+              dataset={historyDataset}
+              error={historyError}
+              asOfDate={asOfDate}
+              query={historyQuery}
+              onQueryChange={setHistoryQuery}
+              areaEvents={areaHistoryEvents}
+              counts={historyCounts}
+              activeEvent={activeHistoryEvent}
+              companyHistory={companyHistory}
+              unmappedEvents={unmappedHistoryEvents}
+              onSelect={(event) => setSelectedEventId(event.id)}
+            />
           )}
         </aside>
       </section>

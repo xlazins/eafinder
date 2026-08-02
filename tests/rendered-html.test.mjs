@@ -11,18 +11,18 @@ test("server-renders the SettatScope product", async () => {
   assert.match(html, /SettatScope/);
   assert.match(html, /Settat, Morocco/);
   assert.match(html, /Analyze this location/);
+  assert.match(html, /Location fit/);
+  assert.match(html, /Business history/);
+  assert.match(html, /Official Gazette timeline/);
   assert.doesNotMatch(html, /prototype|demo|monthly rent|codex-preview/i);
 });
 
-test("server-renders the business evolution view", async () => {
+test("redirects the retired evolution route to the unified map", async () => {
   const html = await readFile(
     new URL("../.next/server/app/evolution.html", import.meta.url),
     "utf8",
   );
-  assert.match(html, /<title>Business Evolution \| SettatScope<\/title>/i);
-  assert.match(html, /Business evolution on the map/);
-  assert.match(html, /Official Gazette layer/i);
-  assert.doesNotMatch(html, /monthly rent|prototype|demo/i);
+  assert.match(html, /NEXT_REDIRECT;replace;\/;307/);
 });
 
 test("builds a compact, deduplicated Gazette history database", async () => {
